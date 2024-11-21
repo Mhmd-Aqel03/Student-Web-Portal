@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang = "en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.3.3/darkly/bootstrap.min.css" integrity="sha512-HDszXqSUU0om4Yj5dZOUNmtwXGWDa5ppESlX98yzbBS+z+3HQ8a/7kcdI1dv+jKq+1V5b01eYurE7+yFjw6Rdg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Login page</title>
+    <style>
+        .inputstuff{
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body>
+<div class="block justify-content-center align-items-center">
+    <h1 class="text-center">Enter Class Data</h1>
+    <div class="d-flex justify-content-center align-items-center vh-10">
+        <form action="/admin/createClass" method="post">
+            <div>
+                <input class="form-control mb-3 inputstuff" type="text" name="section" placeholder="Class Section" th:value="${oldClass} ? ${oldClass.section} : ''"/>
+            </div>
+            <div>
+                <input class="form-control mb-3 inputstuff" type="text" name="timeFrame" placeholder="Time frame" th:value="${oldClass} ? ${oldClass.timeFrame} : ''"/>
+            </div>
+            <div>
+                <select name="lecturerId" class="form-select">
+                    <option th:each="lecterur: ${lecturers}"
+                            th:value="${lecterur.id}"
+                            th:text="${lecterur.name}"
+                            th:selected="${oldClass != null and oldClass.lecturer.id == lecterur.id}"></option>
+                </select>
+            </div>
+            <div>
+                <select name="courseId" class="form-select mb-3">
+                    <option th:each="course: ${courses}"
+                            th:value="${course.id}"
+                            th:text="${course.name}"
+                            th:selected="${oldClass != null and oldClass.course.id == course.id}"></option>
+                </select>
+            </div>
+
+            <!-- Hidden Id -->
+            <input type="hidden" name="id" th:value="${oldClass} ? ${oldClass.id} :'-1'">
+            <input class="btn btn-primary" type="submit" th:value="${oldClass} ? 'Update Class': 'Create Class'" value="Add Course" />
+        </form>
+    </div>
+</div>
+</body>
+</html>

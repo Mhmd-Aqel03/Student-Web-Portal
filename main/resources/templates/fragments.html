@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<!--Header-->
+<div th:fragment="header">
+    <div class="row">
+        <div class="col">
+            <h1 th:text="Hello"></h1>
+        </div>
+        <div class="col">
+            <a th:href="@{/logout}" class="btn btn-info">
+                <span class="glyphicon glyphicon-log-out"></span> Log out
+            </a>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
